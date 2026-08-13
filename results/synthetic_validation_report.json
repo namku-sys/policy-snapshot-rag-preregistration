@@ -1,0 +1,81 @@
+{
+  "result_classification": "engineering_dry_run_with_synthetic_data",
+  "warning": "사전등록 Release 이전의 합성자료 공학 검증이며 논문의 확증적 실험 결과가 아닙니다.",
+  "config_alignment": {
+    "chunks_606": true,
+    "parents_301": true,
+    "contrast_queries_2167": true,
+    "invariant_pairs_1866": true,
+    "axis_total": true
+  },
+  "dataset": {
+    "chunks": 606,
+    "parent_queries": 301,
+    "contrast_queries": 2167,
+    "invariant_pairs": 1866,
+    "axis_counts": {
+      "V1": 467,
+      "V2": 301,
+      "V3": 467,
+      "V4": 466,
+      "V5": 466
+    }
+  },
+  "policy_snapshot": {
+    "version": "synthetic-policy-1.0",
+    "roles": {
+      "general": 0,
+      "manager": 1,
+      "auditor": 2
+    },
+    "generated_at": "2026-08-13T23:45:55.138417+00:00",
+    "corpus_hash": "bca9067baafe2d34693fc840c694cc9fc03c0d56eebeb139cc4fb970083ec3aa",
+    "query_hash": "d894e788222cace25c124c67f956d738b79032a032741d98ebaa59f85f5e22b6",
+    "snapshot_hash_sha256": "7607d48916d56ad3825a037f1d0348e940fa2d8ca8fdf76422a45d64a8453c9d",
+    "hmac_sha256": null,
+    "hmac_status": "not_configured"
+  },
+  "S4_postfilter": {
+    "pair_count": 2167,
+    "invariant_pair_count": 1866,
+    "intermediate_leakage_pair_rate": 0.7165058949624866,
+    "final_leakage_pair_rate": 0.0,
+    "temporal_constraint_violation_rate": 0.0,
+    "mean_ndcg_at_5": 0.8001500421165691,
+    "hit_at_5": 0.9506229810798339,
+    "p95_pair_latency_ms": 3.664000003482215,
+    "zero_event_rule_of_three_upper_95": null
+  },
+  "S5_prefilter": {
+    "pair_count": 2167,
+    "invariant_pair_count": 1866,
+    "intermediate_leakage_pair_rate": 0.0,
+    "final_leakage_pair_rate": 0.0,
+    "temporal_constraint_violation_rate": 0.0,
+    "mean_ndcg_at_5": 0.8001500421165691,
+    "hit_at_5": 0.9506229810798339,
+    "p95_pair_latency_ms": 3.3001000119838864,
+    "zero_event_rule_of_three_upper_95": 0.001607717041800643
+  },
+  "impersonation": {
+    "queries": 100,
+    "authorization_hash_changes": 0,
+    "passed": true
+  },
+  "concurrency": {
+    "workers": 10,
+    "requests": 100,
+    "p95_latency_ms": 2.125200000591576,
+    "wall_time_ms": 138.69459999841638,
+    "passed_under_3_seconds": true
+  },
+  "acceptance": {
+    "all_config_counts_match": true,
+    "S5_zero_intermediate_leakage": true,
+    "S5_zero_final_leakage": true,
+    "S5_zero_temporal_violation": true,
+    "rule_of_three_under_0_0075": true,
+    "impersonation_blocked": true,
+    "p95_under_3_seconds": true
+  }
+}
