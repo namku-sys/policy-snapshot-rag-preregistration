@@ -1,0 +1,60 @@
+study:
+  researcher: "Lee Nam Ku"
+  protocol_version: "draft-0.1"
+  registration_status: "draft_for_future_replication"
+  experiment_starts_after_release: true
+
+corpus:
+  chunk_count: 606
+  public_source_text_in_repository: false
+
+queries:
+  parent_total: 301
+  existing_queries: 101
+  new_queries: 200
+  contrastive_queries: 2167
+  valid_invariant_pairs: 1866
+  impersonation_queries: 100
+
+roles:
+  - general
+  - manager
+  - auditor
+
+reference_dates:
+  - before_revision
+  - revision_day
+  - after_revision
+  - repealed_clause_valid_date
+  - latest_date
+
+retrieval:
+  systems:
+    - S1
+    - S2
+    - S3
+    - S4
+    - S5
+  top_k:
+    - 1
+    - 3
+    - 5
+    - 10
+
+thresholds:
+  significance_level: 0.05
+  rule_of_three_upper_limit: 0.0075
+  obr_reduction_target: 0.30
+  maximum_ndcg_drop: 0.02
+  concurrent_users: 10
+  maximum_p95_seconds: 3.0
+  contrastive_batch_limit_seconds: null
+  crypto_verification_p95_limit_ms: null
+
+statistics:
+  multiple_testing: "Holm-Bonferroni"
+  zero_event_method: "Rule of Three"
+  binomial_interval: "Wilson 95%"
+  paired_test: "Wilcoxon signed-rank"
+  effect_size: "Cliff's delta"
+
