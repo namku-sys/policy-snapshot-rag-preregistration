@@ -1,0 +1,11 @@
+{
+  "version": "synthetic-policy-1.0",
+  "roles": {
+    "general": 0,
+    "manager": 1,
+    "auditor": 2
+  },
+  "generated_at": "2026-08-13T23:45:55.138417+00:00",
+  "corpus_hash": "bca9067baafe2d34693fc840c694cc9fc03c0d56eebeb139cc4fb970083ec3aa",
+  "query_hash": "d894e788222cace25c124c67f956d738b79032a032741d98ebaa59f85f5e22b6"
+}
