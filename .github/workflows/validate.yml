@@ -1,0 +1,31 @@
+name: Synthetic empirical validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/**"
+      - "config/**"
+      - "run_validation.cmd"
+      - ".github/workflows/validate.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run unit tests
+        run: python -m unittest discover -s scripts -p "test_*.py" -v
+      - name: Run synthetic validation
+        run: python scripts/run_empirical_validation.py --output results
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-validation-evidence
+          path: |
+            results/synthetic_validation_report.json
+            results/synthetic_pair_results.csv
+            results/synthetic_policy_snapshot.json
