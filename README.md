@@ -1,2 +1,29 @@
-# policy-snapshot-rag-preregistration
-Preregistration and reproducibility materials for policy-snapshot-based secure regulation retrieval experiments
+# Policy-Snapshot RAG Preregistration
+
+공공기관 폐쇄망 규정 검색에서 정책 스냅샷 기반 권한·시점 일관성을 검증하기 위한 연구 저장소입니다.
+
+## 연구자
+
+이남구(Lee Nam Ku)
+
+## 연구 내용
+
+본 연구는 검색 전 허용집합 게이트웨이와 검색 후 사후 필터링을 동일한 규정 코퍼스와 대조 질의에서 비교합니다.
+
+## 폴더 안내
+
+- `preregistration`: 연구가설, 판정기준 및 변경 이력
+- `config`: 실험에 사용할 고정 설정값
+- `data`: 평가자료의 구성 및 공개 범위
+- `scripts`: 실험 실행 및 검증 코드 안내
+- `checksums`: 입력자료의 SHA-256 해시값 안내
+- `results`: 사전등록 이후 수행할 재현실험 결과
+
+## 현재 상태
+
+기존 논문 실험은 이미 수행되었으므로 이 저장소의 현재 문서는 소급 사전등록 자료가 아닙니다. 향후 독립 재현실험을 시작하기 전에 가설, 임계값, 제외 규칙과 분석방법을 확정하여 `preregistration-v1.0` Release로 발행할 예정입니다.
+
+## 개인정보 보호
+
+이 저장소에는 규정 원문, 개인정보, 감사자료, 인사·징계자료, 비밀번호, API 키 또는 암호화 개인키를 올리지 않습니다.
+
