@@ -1,8 +1,9 @@
 study:
   researcher: "Lee Nam Ku"
-  protocol_version: "draft-0.1"
-  registration_status: "draft_for_future_replication"
+  protocol_version: "v1.0"
+  registration_status: "registered_for_future_replication"
   experiment_starts_after_release: true
+  thesis_experiment_covered: false   # 학위논문 본실험은 이 등록의 대상이 아님
 
 corpus:
   chunk_count: 606
@@ -15,6 +16,8 @@ queries:
   contrastive_queries: 2167
   valid_invariant_pairs: 1866
   impersonation_queries: 100
+  min_valid_invariant_pairs: 400    # Rule of Three 상한 0.0075 충족에 필요한 하한
+  min_time_varying_pairs: 250
 
 roles:
   - general
@@ -40,21 +43,60 @@ retrieval:
     - 3
     - 5
     - 10
+  primary_k: 5
+  intermediate_m: 50
+  m_sensitivity:
+    - 20
+    - 50
+    - 100
 
 thresholds:
   significance_level: 0.05
   rule_of_three_upper_limit: 0.0075
   obr_reduction_target: 0.30
   maximum_ndcg_drop: 0.02
+  gateway_overhead_ratio: 0.20        # H3-a: S3 대비 S5의 P95 증가 상한
   concurrent_users: 10
-  maximum_p95_seconds: 3.0
-  contrastive_batch_limit_seconds: null
-  crypto_verification_p95_limit_ms: null
+  maximum_p95_seconds: 3.0            # H3-c
+
+  # H3-b 대조 검증 배치 — 상시 서비스가 아닌 배치 절차이므로
+  # 단일 질의 대비 비율이 아니라 완료 시간과 확장성으로 판정한다.
+  contrastive_batch_limit_seconds: 3600      # 야간 배치 창 1시간
+  contrastive_batch_linearity_r2_min: 0.95   # k에 대한 소요시간 선형회귀 R²
+  contrastive_batch_k10_over_k1_min: 8.0     # 이론 5.5배 + 고정비용 허용 하한
+  contrastive_batch_k10_over_k1_max: 12.0    # 상한
+
+  # H4b 암호검증 오버헤드 — 모든 질의에서 발생하는 상시 비용이므로
+  # 전체 응답 예산(3,000 ms)의 소수 비율로 제한한다.
+  crypto_verification_p95_limit_ms: 50       # 전체 예산의 약 1.7%
+
+labels:
+  self_agreement_min: 0.90        # 자기 일치도(2주 간격 재라벨)
+  kappa_min: 0.60                 # 제2 주석자 Cohen's κ
+  sample_ratio: 0.10
+  on_kappa_below_min: "suspend_absolute_obr_interpretation"
 
 statistics:
   multiple_testing: "Holm-Bonferroni"
   zero_event_method: "Rule of Three"
   binomial_interval: "Wilson 95%"
+  paired_binary_test: "McNemar"
   paired_test: "Wilcoxon signed-rank"
   effect_size: "Cliff's delta"
+  bootstrap_resamples: 2000
 
+exclusion:
+  on_policy_version_mismatch: true
+  on_policy_cache_reload: true
+  on_index_hash_mismatch: true
+  on_authorized_set_hash_mismatch: true    # 시점 불변축에 한함
+  repeats: 3
+  nondeterminism_tolerance: 0.01           # 비결정성 쌍 1% 초과 시 결과 확정 보류
+  report_excluded_counts: true
+
+preconditions:
+  static_dataflow_paths_max: 0
+  static_analysis_includes_reranker: true   # 재순위화·질의 확장 포함 구성에서 검사
+  reference_implementation_match: "all_grade_date_combinations"
+  index_hash_unique: true
+  impersonation_hash_changes_max: 0
